@@ -1,27 +1,33 @@
 import {GraphQLServer} from 'graphql-yoga';
 
+//Scaler Types String, Boolean, Int, Float, ID
+
 const typeDefs=`
     type Query{
-        hello:String!,
+        id:ID!,
         name:String!,
-        location:String!,
-        bio:String!
+        age:Int!,
+        employed:Boolean!,
+        gpa:Float
     }      
 `
 
 const resolvers={
     Query:{
-        hello(){
-            return 'this is my first query'
+        id(){
+            return '#12344'
         },
         name(){
             return 'ajanthan' 
         },
-        bio(){
-            return 'some bio information' 
+        age(){
+            return 35 
         },
-        location(){
-            return 'location information' 
+        employed(){
+            return false 
+        },
+        gpa(){
+            return 3.0
         }
     }
 }
