@@ -81,7 +81,8 @@ const typeDefs=`
         name:String!,
         speciality:String!,
         firstPublish:Int,
-        active:Boolean
+        active:Boolean,
+        books:[Book!]!
     }
     
 `
@@ -154,14 +155,21 @@ const resolvers={
                 return creater.id==parent.authur
             })
         },
-    }
+    },
+    Authur:{
+        books(parent, args, ctx, info){
+            return Books.filter((bo)=>{
+                return bo.authur===parent.id
+            })
+        },
+    },
 }
 
-const sever=new GraphQLServer({
+const server=new GraphQLServer({
     typeDefs:typeDefs,
     resolvers:resolvers
 })
 
-sever.start(()=>{
+server.start(()=>{
     console.log("The server is up and running");
 })
