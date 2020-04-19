@@ -7,27 +7,47 @@ const Books=
         price:10.50,
         relaeaseYear:1998,
         rating:4,
-        inStock:true
+        inStock:true,
+        authur:`1`
+
     },
     {
         title:"Robin hood",
         price:12.50,
         relaeaseYear:2008,
         rating:5,
-        inStock:true
+        inStock:true,
+        authur:`1`
     },
-    
+    {
+        title:"Oliver Twist",
+        price:15.50,
+        relaeaseYear:2002,
+        rating:3,
+        inStock:true,
+        authur:`2`
+    },
+    {
+        title:"Tin TIn",
+        price:25.50,
+        relaeaseYear:2004,
+        rating:4,
+        inStock:true,
+        authur:`1`
+    },
 ]
 
 const Authurs=
 [
     {
+        id:`1`,
         name:'AJANTHAN',
         speciality:'Fictionist',
         firstPublish:2001,
         active:true
     },
     {
+        id:`2`,
         name:'SHAMARAN',
         speciality:'NOVALIST',
         firstPublish:2006,
@@ -53,9 +73,11 @@ const typeDefs=`
         price:Float!,
         relaeaseYear:Int,
         rating:Float,
-        inStock:Boolean
+        inStock:Boolean,
+        authur:Authur!
     }
     type Authur{
+        id:ID!,
         name:String!,
         speciality:String!,
         firstPublish:Int,
@@ -125,6 +147,13 @@ const resolvers={
                 active:true
             }
         }
+    },
+    Book:{
+        authur(parent, args, ctx, info){
+            return Authurs.find((creater)=>{
+                return creater.id==parent.authur
+            })
+        },
     }
 }
 
