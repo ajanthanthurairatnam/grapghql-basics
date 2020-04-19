@@ -4,6 +4,7 @@ import {GraphQLServer} from 'graphql-yoga';
 
 const typeDefs=`
     type Query{
+       greetings(name:String):String!,
        book:Book!,
        authur:Authur!
     }  
@@ -25,6 +26,10 @@ const typeDefs=`
 
 const resolvers={
     Query:{
+        greetings(parent, args, ctx, info){
+            console.log(args);
+            return `Hello ${args && args.name? args.name :""}`; 
+        },
         book(){
             return {
                 title:"Adventures of GraphQL",
