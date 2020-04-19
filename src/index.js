@@ -3,6 +3,7 @@ import {GraphQLServer} from 'graphql-yoga';
 const Books=
 [
     {
+        id:`10001`,
         title:"Alice in the wonder land",
         price:10.50,
         relaeaseYear:1998,
@@ -12,6 +13,7 @@ const Books=
 
     },
     {
+        id:`10002`,
         title:"Robin hood",
         price:12.50,
         relaeaseYear:2008,
@@ -20,6 +22,7 @@ const Books=
         authur:`1`
     },
     {
+        id:`10003`,
         title:"Oliver Twist",
         price:15.50,
         relaeaseYear:2002,
@@ -28,6 +31,7 @@ const Books=
         authur:`2`
     },
     {
+        id:`10004`,
         title:"Tin TIn",
         price:25.50,
         relaeaseYear:2004,
@@ -61,12 +65,31 @@ const Comments=
 [
     {
         id:`1`,
-        text:'Comment One Please check'
+        text:'Comment One',
+        book:'10001'
     },
     {
         id:`2`,
-        text:'Comment Two Please check'
+        text:'Comment Two',
+        book:'10002'
+    },
+    {
+        id:`3`,
+        text:'Comment Three',
+        book:'10001'
+    },
+    {
+        id:`4`,
+        text:'Comment Four',
+        book:'10003'
+    },
+    {
+        id:`5`,
+        text:'Comment Five',
+        book:'10004'
+
     }
+
 
 ]
 
@@ -84,12 +107,14 @@ const typeDefs=`
        authur:Authur!
     }  
     type Book{
+        id:ID!,
         title:String!,
         price:Float!,
         relaeaseYear:Int,
         rating:Float,
         inStock:Boolean,
-        authur:Authur!
+        authur:Authur!,
+        comment:[Comment!]!
     }
     type Authur{
         id:ID!,
@@ -101,7 +126,8 @@ const typeDefs=`
     }
     type Comment{
         id:ID!,
-        text:String
+        text:String,
+        books:[Book!]!
     }
     
 `
@@ -192,6 +218,14 @@ const resolvers={
             })
         },
     },
+    Comment:{
+        books(parent, args, ctx, info){
+            return Books.filter((bo)=>{
+                return bo.id===parent.book
+            })
+        },
+    },
+
 
 }
 
