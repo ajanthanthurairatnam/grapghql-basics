@@ -4,30 +4,43 @@ import {GraphQLServer} from 'graphql-yoga';
 
 const typeDefs=`
     type Query{
+       book:Book!,
+       authur:Authur!
+    }  
+    type Book{
         title:String!,
         price:Float!,
         relaeaseYear:Int,
         rating:Float,
         inStock:Boolean
-    }      
+    }
+    type Authur{
+        name:String!,
+        speciality:String!,
+        firstPublish:Int,
+        active:Boolean
+    }
+    
 `
 
 const resolvers={
     Query:{
-        title(){
-            return '#Camera12345'
+        book(){
+            return {
+                title:"Adventures of GraphQL",
+                price:100.10,
+                relaeaseYear:200,
+                rating:4,
+                inStock:true
+            }
         },
-        price(){
-            return 1000 
-        },
-        relaeaseYear(){
-            return 2008 
-        },
-        rating(){
-            return 4.5 
-        },
-        inStock(){
-            return true
+        authur(){
+            return {
+                name:"Ajanthan",
+                speciality:'SD',
+                firstPublish:2017,
+                active:true
+            }
         }
     }
 }
