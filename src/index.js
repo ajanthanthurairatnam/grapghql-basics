@@ -21,7 +21,7 @@ const resolvers={
             return 1000 
         },
         relaeaseYear(){
-            return 2020 
+            return 2008 
         },
         rating(){
             return 4.5 
