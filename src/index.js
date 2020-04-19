@@ -4,30 +4,30 @@ import {GraphQLServer} from 'graphql-yoga';
 
 const typeDefs=`
     type Query{
-        id:ID!,
-        name:String!,
-        age:Int!,
-        employed:Boolean!,
-        gpa:Float
+        title:String!,
+        price:Float!,
+        relaeaseYear:Int,
+        rating:Float,
+        inStock:Boolean
     }      
 `
 
 const resolvers={
     Query:{
-        id(){
-            return '#12344'
+        title(){
+            return '#Camera12345'
         },
-        name(){
-            return 'ajanthan' 
+        price(){
+            return 1000 
         },
-        age(){
-            return 35 
+        relaeaseYear(){
+            return 2020 
         },
-        employed(){
-            return false 
+        rating(){
+            return 4.5 
         },
-        gpa(){
-            return 3.0
+        inStock(){
+            return true
         }
     }
 }
