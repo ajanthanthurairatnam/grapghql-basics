@@ -57,10 +57,25 @@ const Authurs=
 ]
 
 
+const Comments=
+[
+    {
+        id:`1`,
+        text:'Comment One Please check'
+    },
+    {
+        id:`2`,
+        text:'Comment Two Please check'
+    }
+
+]
+
+
 const typeDefs=`
     type Query{
        greetings(name:String):String!,
        books(query:String):[Book!]!,
+       comments(query:String):[Comment!]!,
        authurs(query:String):[Authur!]!,
        add(number1:Float!, number2:Float!):Float,
        addArray(numbers:[Float!]):Float,
@@ -84,6 +99,10 @@ const typeDefs=`
         active:Boolean,
         books:[Book!]!
     }
+    type Comment{
+        id:ID!,
+        text:String
+    }
     
 `
 
@@ -100,6 +119,16 @@ const resolvers={
 
             return Books.filter((book)=>{
                 return book.title.toLowerCase().includes(args.query.toLowerCase());
+            })
+        },
+        comments(parent, args, ctx, info){
+            if(!args.query)
+            {
+                return Comments;
+            }
+
+            return Comments.filter((comment)=>{
+                return comment.text.toLowerCase().includes(args.query.toLowerCase());
             })
         },
         authurs(parent, args, ctx, info){
@@ -163,6 +192,7 @@ const resolvers={
             })
         },
     },
+
 }
 
 const server=new GraphQLServer({
